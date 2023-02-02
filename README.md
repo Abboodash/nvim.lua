@@ -48,10 +48,10 @@
 <summary>
     <b>Screenshots</b>
 </summary>
-    <image src="/.image/dashboard.png" alt="dashboard screenshot"> 
-    <image src="/.image/project.png" alt="project screenshot">
-    <image src="/.image/wilder.png" alt="wilder screenshot">
-    <image src="/.image/terminal.png" alt="terminal screenshot">
+    <image src="/.images/dashboard.png" alt="dashboard screenshot"> 
+    <image src="/.images/project.png" alt="project screenshot">
+    <image src="/.images/wilder.png" alt="wilder screenshot">
+    <image src="/.images/terminal.png" alt="terminal screenshot">
 </details>
 
 ## 📦 Setup
