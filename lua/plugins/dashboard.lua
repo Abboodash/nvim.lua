@@ -31,6 +31,12 @@ function M.config()
                 { desc = "ﮮ Update", group = "packages_group", key = "u", action = "Lazy update" },
                 { desc = " Files", group = "files_group", key = "f", action = "Telescope find_files" },
                 {
+                    desc = " config",
+                    group = "files_group",
+                    key = "c",
+                    action = "e " .. vim.fn.stdpath("config") .. " | e " .. vim.fn.stdpath("config") .. "/init.lua",
+                },
+                {
                     desc = " dotfiles",
                     group = "files_group",
                     key = "d",
