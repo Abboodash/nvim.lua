@@ -48,10 +48,10 @@
 <summary>
     <b>Screenshots</b>
 </summary>
-    <image src="/blob/main/.image/dashboard.png" alt="dashboard screenshot"> 
-    <image src="/blob/main/.image/project.png" alt="project screenshot">
-    <image src="/blob/main/.image/wilder.png" alt="wilder screenshot">
-    <image src="/blob/main/.image/terminal.png" alt="terminal screenshot">
+    <image src="/.image/dashboard.png" alt="dashboard screenshot"> 
+    <image src="/.image/project.png" alt="project screenshot">
+    <image src="/.image/wilder.png" alt="wilder screenshot">
+    <image src="/.image/terminal.png" alt="terminal screenshot">
 </details>
 
 ## 📦 Setup
