@@ -3,7 +3,7 @@ local set = vim.opt
 
 opt.mapleader = " "
 
-vim.opt.guifont = { "FiraCode Regular", ":h16" }
+set.guifont = { "FiraCode Regular", ":h16" }
 
 set.expandtab = true
 set.smarttab = true
@@ -39,7 +39,11 @@ set.hidden = true
 set.smartindent = true
 
 set.fillchars = {
-    foldopen = "",
-    foldclose = "",
-    eob = " ",
+	foldopen = "",
+	foldclose = "",
+	eob = " ",
 }
+
+if opt.neovide then
+	opt.neovide_transparency = 0.95
+end
