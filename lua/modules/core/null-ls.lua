@@ -18,6 +18,7 @@ function M.config()
         formatting.csharpier,
         formatting.autopep8,
         formatting.beautysh,
+        formatting.nixfmt,
         require("typescript.extensions.null-ls.code-actions"),
     }
 

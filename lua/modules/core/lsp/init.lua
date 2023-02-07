@@ -9,9 +9,13 @@ local M = {
         -- for barbecue
         "SmiteshP/nvim-navic",
 
+        -- lua
+        "folke/neodev.nvim",
+    
         -- rust
         "simrat39/rust-tools.nvim",
         "mfussenegger/nvim-dap",
+        "rcarriga/nvim-dap-ui",     
 
         -- omnisharp
         "Hoffs/omnisharp-extended-lsp.nvim",
@@ -41,6 +45,7 @@ function M.config()
             "sumneko_lua",
             "omnisharp_mono",
             "bashls",
+            "nil_ls",
 
             --[[        
            --DAPs
@@ -53,10 +58,14 @@ function M.config()
             "csharpier",
             "autopep8",
             "beautysh",
-        ]]
+            nixfmt, nix code formatter install by nix pkg manager
+            ]]
         },
         automatic_installation = true,
     })
+
+    require("modules.core.lsp.neodev")
+ --   require("modules.core.lsp.dap.dapui")
 
     local lspconfig = require("lspconfig")
 

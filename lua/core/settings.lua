@@ -45,5 +45,7 @@ set.fillchars = {
 }
 
 if opt.neovide then
-	opt.neovide_transparency = 0.95
+	opt.neovide_transparency = 0.92
+else
+  set.pumblend = 40  
 end

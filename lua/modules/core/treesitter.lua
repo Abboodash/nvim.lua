@@ -17,6 +17,7 @@ function M.config()
             "typescript",
             "c_sharp",
             "html",
+            "nix",
         },
 
         sync_install = false,

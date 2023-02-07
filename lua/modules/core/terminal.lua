@@ -25,10 +25,10 @@ function M.config()
 
 	local Terminal = require("toggleterm.terminal").Terminal
 
-	local htop = Terminal:new({ cmd = "htop", direction = "float", size = 180, hidden = true })
+	local btop = Terminal:new({ cmd = "btop", direction = "float", size = 180, hidden = true })
 
-	function _HTOP_TERMINAL_TOGGLE()
-		htop:toggle()
+	function _BTOP_TERMINAL_TOGGLE()
+		btop:toggle()
 	end
 
 	local map = vim.api.nvim_set_keymap

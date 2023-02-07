@@ -2,11 +2,12 @@
 
 > Plugin manager: [`folke/lazy.nvim`](https://github.com/folke/lazy.nvim)
 
+> NOTE: for the [nixfmt](https://github.com/serokell/nixfmt) formatter install it manually
+
 <details>
   <summary>
 	<b>Plugins</b>
   </summary>
-   
 - [autoclose.nvim](https://github.com/m4xshen/autoclose.nvim)
 - [barbar.nvim](https://github.com/romgrk/barbar.nvim)
 - [barbecue.nvim](https://github.com/utilyre/barbecue.nvim)
@@ -41,7 +42,6 @@
 - [nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)
 - [which-key.nvim](https://github.com/folke/which-key.nvim)
 - [wilder.nvim](https://github.com/gelguy/wilder.nvim)
-  
 </details>
 
 <details>
@@ -62,6 +62,12 @@ git clone https://github.com/Abboodash/nvim.lua
 
 # Move the dir and rename it
 mv nvim.lua ~/.config/nvim
+```
+
+then make a directory called `.profile` and a file in it `colorscheme.json` and put in it:
+
+```json
+{ "current_colorscheme": "github_dark_default" }
 ```
 
 > NOTE: on windows the move command and the path will be different, but you can just move the dir using File Explorer

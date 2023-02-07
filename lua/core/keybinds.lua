@@ -26,7 +26,7 @@ wk.register({
     },
     n = {
         name = "terminal",
-        h = { "<cmd>lua _HTOP_TERMINAL_TOGGLE()<cr>", "htop" },
+        b = { "<cmd>lua _BTOP_TERMINAL_TOGGLE()<cr>", "btop" },
     },
     x = {
         name = "trouble",
@@ -53,7 +53,16 @@ wk.register({
             l = { "<cmd>BufferOrderByLanguage<cr>", "Order by language" },
         },
     },
-}, { prefix = "<leader>" })
+    l = {
+        name = "lazy",
+        l = { "<cmd>Lazy home<cr>", "Home" },
+        s = { "<cmd>Lazy sync<cr>", "Sync" },
+        i = { "<cmd>Lazy install<cr>", "Install" },
+        u = { "<cmd>Lazy update<cr>", "Update" },
+        c = { "<cmd>Lazy clean<cr>", "Clean"},
+        h = { "<cmd>Lazy help<cr>", "Help" },
+    },
+ }, { prefix = "<leader>" })
 
 local opts = { noremap = true, silent = true }
 
