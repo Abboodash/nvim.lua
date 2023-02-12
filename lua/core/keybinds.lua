@@ -18,6 +18,8 @@ wk.register({
         g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
         t = { "<cmd>Telescope notify<cr>", "Notify" },
         d = { "<cmd>TodoTelescope<cr>", "Todo" },
+        r = { "<cmd>Telescope repo<cr>", "Repos" },
+        m = { "<cmd>Telescope bookmarks<cr>", "Browser Bookmarks" },
     },
     m = {
         name = "mason",
@@ -51,6 +53,17 @@ wk.register({
             b = { "<cmd>BufferOrderByBufferNumber<cr>", "Order by number" },
             d = { "<cmd>BufferOrderByDirectory<cr>", "Order by directory" },
             l = { "<cmd>BufferOrderByLanguage<cr>", "Order by language" },
+        },
+    },
+    h = {
+        name = "harpoon",
+        a = { require("harpoon.mark").add_file, "Add file" },
+        r = { require("harpoon.mark").rm_file, "Remove file" },
+        m = { require("harpoon.ui").toggle_quick_menu, "Toggle quick menu"},
+        n = {
+            name = "navigate",
+            n = { require("harpoon.ui").nav_next, "Next" },
+            p = { require("harpoon.ui").nav_prev, "Previous" },
         },
     },
     l = {
@@ -95,5 +108,5 @@ map("n", "<C-p>", ":BufferPick<CR>", opts)
 
 -- nvim
 map("n", "<C-s>", "<cmd>w<cr>", opts)
-map("n", "<A-Up>", "<cmd>m .-2<cr>", opts)
-map("n", "<A-Down>", "<cmd>m .+1<cr>", opts)
+map("n", "<A-k>", "<cmd>m .-2<cr>", opts)
+map("n", "<A-j>", "<cmd>m .+1<cr>", opts)

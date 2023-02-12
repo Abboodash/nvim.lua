@@ -23,7 +23,8 @@ set.fileencoding = "utf-8"
 set.termguicolors = true
 
 set.number = true
-set.numberwidth = 2
+set.relativenumber = true
+-- set.numberwidth = 2
 
 set.showmode = false
 
@@ -45,7 +46,7 @@ set.fillchars = {
 }
 
 if opt.neovide then
-	opt.neovide_transparency = 0.92
+	opt.neovide_transparency = 0.86
 else
-  set.pumblend = 40  
+    set.pumblend = 40
 end

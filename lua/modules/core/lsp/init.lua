@@ -42,7 +42,7 @@ function M.config()
             "rust_analyzer",
             "tsserver",
             "pyright",
-            "sumneko_lua",
+            "lua_ls",
             "omnisharp_mono",
             "bashls",
             "nil_ls",
@@ -117,8 +117,8 @@ function M.config()
             })
         end,
 
-        ["sumneko_lua"] = function()
-            lspconfig["sumneko_lua"].setup({
+        ["lua_ls"] = function()
+            lspconfig["lua_ls"].setup({
                 on_attach = on_attach,
                 flags = lsp_flags,
 
@@ -130,12 +130,11 @@ function M.config()
                         },
                         diagnostics = {
                             -- Get the language server to recognize the `vim` global
-                            globals = { "vim" },
+                            globals = { "vim", "awesome" },
                         },
                         workspace = {
                             -- Make the server aware of Neovim runtime files
                             library = vim.api.nvim_get_runtime_file("", true),
-                            checkThirdParty = false,
                         },
                         -- Do not send telemetry data containing a randomized but unique identifier
                         telemetry = {
@@ -172,7 +171,7 @@ function M.config()
                     ["textDocument/definition"] = require("omnisharp_extended").handler,
                 },
                 cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
-
+ 
                 enable_roslyn_analyzers = true,
                 organize_imports_on_format = true,
                 enable_import_completion = true,

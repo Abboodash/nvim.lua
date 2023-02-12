@@ -3,8 +3,8 @@ local M = {
     branch = "v2",
     lazy = true,
     keys = {
-        { "s", "<cmd>HopWord<cr>", desc = "Hop a word" },
-        { "l", "<cmd>HopLine<cr>", desc = "Hop a line" },
+        { "ss", "<cmd>HopWord<cr>", desc = "Hop a word" },
+        { "sl", "<cmd>HopLine<cr>", desc = "Hop a line" },
     },
 }
 
