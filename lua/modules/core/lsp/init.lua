@@ -1,43 +1,57 @@
 local M = {
-    "williamboman/mason.nvim",
+'VonHeikemen/lsp-zero.nvim',
+  branch = 'v1.x',
+  dependencies = {
+    -- LSP Support
+    {'neovim/nvim-lspconfig'},             -- Required
+    {'williamboman/mason.nvim'},           -- Optional
+    {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-    dependencies = {
-        -- mason & lsp-config
-        "williamboman/mason-lspconfig.nvim",
-        "neovim/nvim-lspconfig",
+    -- Formatting
+    {"jose-elias-alvarez/null-ls.nvim"}, -- Required
 
-        -- for barbecue
-        "SmiteshP/nvim-navic",
+    -- Autocompletion
+    {'hrsh7th/nvim-cmp'},         -- Required
+    {'hrsh7th/cmp-nvim-lsp'},     -- Required
+    {"hrsh7th/cmp-cmdline"},      -- Optional
+    {'hrsh7th/cmp-buffer'},       -- Optional
+    {'hrsh7th/cmp-path'},         -- Optional
+    {'saadparwaiz1/cmp_luasnip'}, -- Optional
+    {'hrsh7th/cmp-nvim-lua'},     -- Optional
 
-        -- lua
-        "folke/neodev.nvim",
-    
-        -- rust
-        "simrat39/rust-tools.nvim",
-        "mfussenegger/nvim-dap",
-        "rcarriga/nvim-dap-ui",     
+    -- Snippets
+    {'L3MON4D3/LuaSnip'},             -- Required
+	{"onsails/lspkind.nvim"},         -- Required
+    {'rafamadriz/friendly-snippets'}, -- Optional
+  
+    -- Other
+    {"SmiteshP/nvim-navic"},
+    {"jose-elias-alvarez/typescript.nvim"},
+    {"folke/neodev.nvim"},
+    {"simrat39/rust-tools.nvim"},
+    {"mfussenegger/nvim-dap"},
+    {"rcarriga/nvim-dap-ui"},     
+    {"Hoffs/omnisharp-extended-lsp.nvim"},
 
-        -- omnisharp
-        "Hoffs/omnisharp-extended-lsp.nvim",
-
-        -- typescript
-        "jose-elias-alvarez/typescript.nvim",
-    },
+    }
 }
 
 function M.config()
-    require("mason").setup({
-        ui = {
-            icons = {
-                package_installed = "✓",
-                package_pending = "➜",
-                package_uninstalled = "✗",
-            },
-        },
+   local lsp = require('lsp-zero').preset({
+        name = 'minimal',
+        set_lsp_keymaps = true,
+        manage_nvim_cmp = true,
+        suggest_lsp_servers = false,
     })
 
-    require("mason-lspconfig").setup({
-        ensure_installed = {
+	local luasnip = require("luasnip")
+	local cmp = require("cmp")
+	local lspkind = require("lspkind")
+
+    -- (Optional) Configure lua language server for neovim
+    lsp.nvim_workspace()
+
+    lsp.ensure_installed({
             -- LSPs
             "rust_analyzer",
             "tsserver",
@@ -47,37 +61,46 @@ function M.config()
             "bashls",
             "nil_ls",
 
-            --[[        
-           --DAPs
-            "codelldb",
-
-            --formatters
-            "rustfmt",
-            "prettier",
-            "stylua",
-            "csharpier",
-            "autopep8",
-            "beautysh",
-            nixfmt, nix code formatter install by nix pkg manager
-            ]]
-        },
-        automatic_installation = true,
+            -- -- DAPs
+            -- "codelldb",
+            -- 
+            -- --formatters
+            -- "rustfmt",
+            -- "prettier",
+            -- "stylua",
+            -- "csharpier",
+            -- "autopep8",
+            -- "beautysh",
+            -- -- "nixfmt", 
     })
 
-    require("modules.core.lsp.neodev")
- --   require("modules.core.lsp.dap.dapui")
+    lsp.setup_nvim_cmp({
+        window = {
+			completion = cmp.config.window.bordered({
+				winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
+			}),
+		},
+        sources = {
+			{ name = "nvim_lsp" },
+			{ name = "luasnip" },
+		},
+		formatting = {
+			format = lspkind.cmp_format({
+				with_text = true,
+				maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+				ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
-    local lspconfig = require("lspconfig")
+				-- The function below will be called before any actual modifications from lspkind
+				-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+				before = function(entry, vim_item)
+					vim_item.menu = entry:get_completion_item().detail
+					return vim_item
+				end,
+			}),
+		},
+    })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-    local lsp_flags = {
-        capabilities = capabilities,
-        debounce_text_changes = 150,
-    }
-
-    local on_attach = function(client, bufnr)
+    lsp.on_attach(function(client, bufnr)
         if client.server_capabilities["documentSymbolProvider"] then
             require("nvim-navic").attach(client, bufnr)
         end
@@ -97,276 +120,15 @@ function M.config()
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
         vim.keymap.set("n", "<A-s>", "<Cmd>lua vim.lsp.buf.format { async = true }<CR>", bufopts)
-    end
+    end)
 
-    local opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+    vim.cmd("highlight! BorderBG guibg=NONE guifg=#7190ca")
+    lsp.setup() 
 
-    local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
-    local codelldb_path = extension_path .. "adapter/codelldb"
-    local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+    require("modules.core.lsp.neodev")
+    require("modules.core.lsp.dap.dapui")
+    require("modules.core.lsp.null-ls")
 
-    require("mason-lspconfig").setup_handlers({
-        function(server_name)
-            lspconfig[server_name].setup({
-                on_attach = on_attach,
-                flags = lsp_flags,
-            })
-        end,
-
-        ["lua_ls"] = function()
-            lspconfig["lua_ls"].setup({
-                on_attach = on_attach,
-                flags = lsp_flags,
-
-                settings = {
-                    Lua = {
-                        runtime = {
-                            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                            version = "LuaJIT",
-                        },
-                        diagnostics = {
-                            -- Get the language server to recognize the `vim` global
-                            globals = { "vim", "awesome" },
-                        },
-                        workspace = {
-                            -- Make the server aware of Neovim runtime files
-                            library = vim.api.nvim_get_runtime_file("", true),
-                        },
-                        -- Do not send telemetry data containing a randomized but unique identifier
-                        telemetry = {
-                            enable = false,
-                        },
-                    },
-                },
-            })
-        end,
-
-        ["tsserver"] = function()
-            require("typescript").setup({
-                disable_commands = false, -- prevent the plugin from creating Vim commands
-                debug = false, -- enable debug logging for commands
-                go_to_source_definition = {
-                    fallback = true, -- fall back to standard LSP definition on failure
-                },
-                server = { -- pass options to lspconfig's setup method
-                    on_attach = on_attach,
-                    flags = lsp_flags,
-                },
-            })
-        end,
-
-        ["omnisharp_mono"] = function()
-            local pid = vim.fn.getpid()
-            local omnisharp_bin = vim.env.HOME .. "/.local/share/nvim/mason/packages/omnisharp-mono/run"
-
-            lspconfig["omnisharp_mono"].setup({
-                on_attach = on_attach,
-                flags = lsp_flags,
-
-                handlers = {
-                    ["textDocument/definition"] = require("omnisharp_extended").handler,
-                },
-                cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
- 
-                enable_roslyn_analyzers = true,
-                organize_imports_on_format = true,
-                enable_import_completion = true,
-            })
-        end,
-
-        ["rust_analyzer"] = function()
-            require("rust-tools").setup({
-                tools = { -- rust-tools options
-
-                    -- how to execute terminal commands
-                    -- options right now: termopen / quickfix
-                    executor = require("rust-tools.executors").termopen,
-
-                    -- callback to execute once rust-analyzer is done initializing the workspace
-                    -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
-                    on_initialized = nil,
-
-                    -- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
-                    reload_workspace_from_cargo_toml = true,
-
-                    -- These apply to the default RustSetInlayHints command
-                    inlay_hints = {
-                        -- automatically set inlay hints (type hints)
-                        -- default: true
-                        auto = true,
-
-                        -- Only show inlay hints for the current line
-                        only_current_line = false,
-
-                        -- whether to show parameter hints with the inlay hints or not
-                        -- default: true
-                        show_parameter_hints = true,
-
-                        -- prefix for parameter hints
-                        -- default: "<-"
-                        parameter_hints_prefix = "<- ",
-
-                        -- prefix for all the other hints (type, chaining)
-                        -- default: "=>"
-                        other_hints_prefix = "=> ",
-
-                        -- whether to align to the length of the longest line in the file
-                        max_len_align = false,
-
-                        -- padding from the left if max_len_align is true
-                        max_len_align_padding = 1,
-
-                        -- whether to align to the extreme right or not
-                        right_align = false,
-
-                        -- padding from the right if right_align is true
-                        right_align_padding = 7,
-
-                        -- The color of the hints
-                        highlight = "Comment",
-                    },
-
-                    -- options same as lsp hover / vim.lsp.util.open_floating_preview()
-                    hover_actions = {
-
-                        -- the border that is used for the hover window
-                        -- see vim.api.nvim_open_win()
-                        border = {
-                            { "╭", "FloatBorder" },
-                            { "─", "FloatBorder" },
-                            { "╮", "FloatBorder" },
-                            { "│", "FloatBorder" },
-                            { "╯", "FloatBorder" },
-                            { "─", "FloatBorder" },
-                            { "╰", "FloatBorder" },
-                            { "│", "FloatBorder" },
-                        },
-
-                        -- Maximal width of the hover window. Nil means no max.
-                        max_width = nil,
-
-                        -- Maximal height of the hover window. Nil means no max.
-                        max_height = nil,
-
-                        -- whether the hover action window gets automatically focused
-                        -- default: false
-                        auto_focus = false,
-                    },
-
-                    -- settings for showing the crate graph based on graphviz and the dot
-                    -- command
-                    crate_graph = {
-                        -- Backend used for displaying the graph
-                        -- see: https://graphviz.org/docs/outputs/
-                        -- default: x11
-                        -- backend = "x11",
-                        -- where to store the output, nil for no output stored (relative
-                        -- path from pwd)
-                        -- default: nil
-                        output = nil,
-                        -- true for all crates.io and external crates, false only the local
-                        -- crates
-                        -- default: true
-                        full = true,
-
-                        -- List of backends found on: https://graphviz.org/docs/outputs/
-                        -- Is used for input validation and autocompletion
-                        -- Last updated: 2021-08-26
-                        enabled_graphviz_backends = {
-                            "bmp",
-                            "cgimage",
-                            "canon",
-                            "dot",
-                            "gv",
-                            "xdot",
-                            "xdot1.2",
-                            "xdot1.4",
-                            "eps",
-                            "exr",
-                            "fig",
-                            "gd",
-                            "gd2",
-                            "gif",
-                            "gtk",
-                            "ico",
-                            "cmap",
-                            "ismap",
-                            "imap",
-                            "cmapx",
-                            "imap_np",
-                            "cmapx_np",
-                            "jpg",
-                            "jpeg",
-                            "jpe",
-                            "jp2",
-                            "json",
-                            "json0",
-                            "dot_json",
-                            "xdot_json",
-                            "pdf",
-                            "pic",
-                            "pct",
-                            "pict",
-                            "plain",
-                            "plain-ext",
-                            "png",
-                            "pov",
-                            "ps",
-                            "ps2",
-                            "psd",
-                            "sgi",
-                            "svg",
-                            "svgz",
-                            "tga",
-                            "tiff",
-                            "tif",
-                            "tk",
-                            "vml",
-                            "vmlz",
-                            "wbmp",
-                            "webp",
-                            "xlib",
-                            "x11",
-                        },
-                    },
-                },
-
-                dap = {
-                    adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-                },
-                server = {
-                    on_attach = on_attach,
-                    flags = lsp_flags,
-                    standalone = false,
-                    settings = {
-                        ["rust-analyzer"] = {
-                            imports = {
-                                granularity = {
-                                    group = "module",
-                                },
-                                prefix = "self",
-                            },
-                            cargo = {
-                                buildScripts = {
-                                    enable = true,
-                                },
-
-                                autoReload = true,
-                            },
-                            procMacro = {
-                                enable = true,
-                            },
-                        },
-                    },
-                },
-            })
-            require("rust-tools").inlay_hints.enable()
-        end,
-    })
 end
 
 return M

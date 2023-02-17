@@ -1,8 +1,18 @@
 local wk = require("which-key")
 
 local package_info = require("package-info")
+local dapui = require("dapui")
 
-wk.register({
+local keybinds = {
+   l = {
+        name = "lazy",
+        l = { "<cmd>Lazy home<cr>", "Home" },
+        s = { "<cmd>Lazy sync<cr>", "Sync" },
+        i = { "<cmd>Lazy install<cr>", "Install" },
+        u = { "<cmd>Lazy update<cr>", "Update" },
+        c = { "<cmd>Lazy clean<cr>", "Clean"},
+        h = { "<cmd>Lazy help<cr>", "Help" },
+    },
     t = {
         name = "tree",
         t = { "<cmd>NvimTreeToggle<cr>", "Toggle" },
@@ -36,7 +46,7 @@ wk.register({
         q = { "<cmd>Trouble quickfix<cr>", "Quickfix" },
         d = { "<cmd>TodoTrouble<cr>", "Todo" },
     },
-    p = {
+    i = {
         name = "package manager",
         n = {
             name = "node",
@@ -66,47 +76,59 @@ wk.register({
             p = { require("harpoon.ui").nav_prev, "Previous" },
         },
     },
-    l = {
-        name = "lazy",
-        l = { "<cmd>Lazy home<cr>", "Home" },
-        s = { "<cmd>Lazy sync<cr>", "Sync" },
-        i = { "<cmd>Lazy install<cr>", "Install" },
-        u = { "<cmd>Lazy update<cr>", "Update" },
-        c = { "<cmd>Lazy clean<cr>", "Clean"},
-        h = { "<cmd>Lazy help<cr>", "Help" },
+    u = {
+        name = "undotree",
+        t = { vim.cmd.UndotreeToggle, "Toggle" },
+        s = { vim.cmd.UndotreeShow, "Show" },
+        h = { vim.cmd.UndotreeHide, "Hide" },
+        f = { vim.cmd.UndotreeFocus, "Focus" },
     },
- }, { prefix = "<leader>" })
+    d = {
+        name = "dap",
+        u = {
+            name = "ui",
+            t = { dapui.toggle, "Toggle" },
+            o = { dapui.open, "Open" },
+            c = { dapui.close, "Close" },
+        },
+    },
+}
 
 local opts = { noremap = true, silent = true }
 
-local map = vim.api.nvim_set_keymap
+wk.register(keybinds, { prefix = "<leader>" })
 
 -- navigator
-map("n", "<leader><Up>", "<cmd>NavigatorUp<cr>", opts)
-map("n", "<leader><Down>", "<cmd>NavigatorDown<cr>", opts)
-map("n", "<leader><Right>", "<cmd>NavigatorRight<cr>", opts)
-map("n", "<leader><Left>", "<cmd>NavigatorLeft<cr>", opts)
-map("n", "<leader><bs>", "<cmd>NavigatorPrevious<cr>", opts)
+vim.keymap.set("n", "<leader><Up>", "<cmd>NavigatorUp<cr>", opts)
+vim.keymap.set("n", "<leader><Down>", "<cmd>NavigatorDown<cr>", opts)
+vim.keymap.set("n", "<leader><Right>", "<cmd>NavigatorRight<cr>", opts)
+vim.keymap.set("n", "<leader><Left>", "<cmd>NavigatorLeft<cr>", opts)
+vim.keymap.set("n", "<leader><bs>", "<cmd>NavigatorPrevious<cr>", opts)
 
 -- barbar
-map("n", "<A-,>", ":BufferPrevious<CR>", opts)
-map("n", "<A-.>", ":BufferNext<CR>", opts)
-map("n", "<A-<>", ":BufferMovePrevious<CR>", opts)
-map("n", "<A->>", ":BufferMoveNext<CR>", opts)
-map("n", "<A-1>", ":BufferGoto 1<CR>", opts)
-map("n", "<A-2>", ":BufferGoto 2<CR>", opts)
-map("n", "<A-3>", ":BufferGoto 3<CR>", opts)
-map("n", "<A-4>", ":BufferGoto 4<CR>", opts)
-map("n", "<A-5>", ":BufferGoto 5<CR>", opts)
-map("n", "<A-6>", ":BufferGoto 6<CR>", opts)
-map("n", "<A-7>", ":BufferGoto 7<CR>", opts)
-map("n", "<A-8>", ":BufferGoto 8<CR>", opts)
-map("n", "<A-9>", ":BufferGoto 9<CR>", opts)
-map("n", "<A-0>", ":BufferLast<CR>", opts)
-map("n", "<A-c>", ":BufferClose<CR>", opts)
-map("n", "<C-p>", ":BufferPick<CR>", opts)
+vim.keymap.set("n", "<A-,>", ":BufferPrevious<CR>", opts)
+vim.keymap.set("n", "<A-.>", ":BufferNext<CR>", opts)
+vim.keymap.set("n", "<A-<>", ":BufferMovePrevious<CR>", opts)
+vim.keymap.set("n", "<A->>", ":BufferMoveNext<CR>", opts)
+vim.keymap.set("n", "<A-1>", ":BufferGoto 1<CR>", opts)
+vim.keymap.set("n", "<A-2>", ":BufferGoto 2<CR>", opts)
+vim.keymap.set("n", "<A-3>", ":BufferGoto 3<CR>", opts)
+vim.keymap.set("n", "<A-4>", ":BufferGoto 4<CR>", opts)
+vim.keymap.set("n", "<A-5>", ":BufferGoto 5<CR>", opts)
+vim.keymap.set("n", "<A-6>", ":BufferGoto 6<CR>", opts)
+vim.keymap.set("n", "<A-7>", ":BufferGoto 7<CR>", opts)
+vim.keymap.set("n", "<A-8>", ":BufferGoto 8<CR>", opts)
+vim.keymap.set("n", "<A-9>", ":BufferGoto 9<CR>", opts)
+vim.keymap.set("n", "<A-0>", ":BufferLast<CR>", opts)
+vim.keymap.set("n", "<A-c>", ":BufferClose<CR>", opts)
+vim.keymap.set("n", "<C-p>", ":BufferPick<CR>", opts)
 
 -- nvim
-map("n", "<C-s>", "<cmd>w<cr>", opts)
-map("n", "<A-k>", "<cmd>m .-2<cr>", opts)
-map("n", "<A-j>", "<cmd>m .+1<cr>", opts)
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })

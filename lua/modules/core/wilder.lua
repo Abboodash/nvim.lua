@@ -25,7 +25,7 @@ function M.config()
     wilder.set_option(
         "renderer",
         wilder.renderer_mux({
-            [":"] = wilder.popupmenu_renderer(wilder.popupmenu_palette_theme({
+            [":"] = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
                 highlighter = {
                     wilder.lua_fzy_highlighter(), -- requires fzy-lua-native vim plugin found
                 },
@@ -40,7 +40,7 @@ function M.config()
 
                 border = "rounded",
                 max_height = "50%",
-                pumblend = 20,
+                pumblend = 40,
                 min_height = 0, -- set to the same as 'max_height' for a fixed height window
                 prompt_position = "top", -- 'top' or 'bottom' to set the location of the prompt
                 reverse = 0,
@@ -49,7 +49,7 @@ function M.config()
             })),
 
             ["/"] = wilder.wildmenu_renderer({
-                pumblend = 40,
+                pumblend = 20,
                 highlighter = {
                     wilder.lua_fzy_highlighter(), -- requires fzy-lua-native vim plugin found
                 },
