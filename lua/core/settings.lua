@@ -57,8 +57,6 @@ set.fillchars = {
 
 vim.diagnostic.config({ virtual_text = true })
 
-set.pumblend = 20 
-
 if opt.neovide then
 	opt.neovide_transparency = 0.86
 end

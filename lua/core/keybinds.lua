@@ -13,18 +13,10 @@ local keybinds = {
         c = { "<cmd>Lazy clean<cr>", "Clean"},
         h = { "<cmd>Lazy help<cr>", "Help" },
     },
-    t = {
-        name = "tree",
-        t = { "<cmd>NvimTreeToggle<cr>", "Toggle" },
-        o = { "<cmd>NvimTreeOpen<cr>", "Open" },
-        c = { "<cmd>NvimTreeClose<cr>", "Close" },
-    },
     f = {
         name = "telescope",
         f = { "<cmd>Telescope find_files<cr>", "Find Files" },
         b = { "<cmd>Telescope file_browser<cr>", "File Browser" },
-        n = { "<cmd>Telescope neoclip<cr>", "Neoclip" },
-        l = { "<cmd>Telescope lazygit<cr>", "Lazygit" },
         g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
         t = { "<cmd>Telescope notify<cr>", "Notify" },
         d = { "<cmd>TodoTelescope<cr>", "Todo" },
@@ -97,13 +89,6 @@ local keybinds = {
 local opts = { noremap = true, silent = true }
 
 wk.register(keybinds, { prefix = "<leader>" })
-
--- navigator
-vim.keymap.set("n", "<leader><Up>", "<cmd>NavigatorUp<cr>", opts)
-vim.keymap.set("n", "<leader><Down>", "<cmd>NavigatorDown<cr>", opts)
-vim.keymap.set("n", "<leader><Right>", "<cmd>NavigatorRight<cr>", opts)
-vim.keymap.set("n", "<leader><Left>", "<cmd>NavigatorLeft<cr>", opts)
-vim.keymap.set("n", "<leader><bs>", "<cmd>NavigatorPrevious<cr>", opts)
 
 -- barbar
 vim.keymap.set("n", "<A-,>", ":BufferPrevious<CR>", opts)

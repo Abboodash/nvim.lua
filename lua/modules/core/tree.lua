@@ -4,6 +4,9 @@ local M = {
         { "nvim-tree/nvim-web-devicons" },
     },
     event = "VimEnter",
+    keys = {
+        { "<leader>tt", vim.cmd.NvimTreeToggle, desc = "Toggle" },
+    },
 }
 
 function M.config()
