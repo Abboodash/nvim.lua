@@ -3,8 +3,9 @@ local wk = require("which-key")
 local package_info = require("package-info")
 local dapui = require("dapui")
 
+
 local keybinds = {
-   l = {
+    L = {
         name = "lazy",
         l = { "<cmd>Lazy home<cr>", "Home" },
         s = { "<cmd>Lazy sync<cr>", "Sync" },
@@ -12,6 +13,12 @@ local keybinds = {
         u = { "<cmd>Lazy update<cr>", "Update" },
         c = { "<cmd>Lazy clean<cr>", "Clean"},
         h = { "<cmd>Lazy help<cr>", "Help" },
+    },
+    t = {
+        name = "tree",
+        t = { vim.cmd.NvimTreeToggle, "Toggle" },
+        o = { vim.cmd.NvimTreeOpen, "Open"},
+        c = { vim.cmd.NvimTreeClose, "Close" },
     },
     f = {
         name = "telescope",
@@ -57,7 +64,7 @@ local keybinds = {
             l = { "<cmd>BufferOrderByLanguage<cr>", "Order by language" },
         },
     },
-    h = {
+    e = {
         name = "harpoon",
         a = { require("harpoon.mark").add_file, "Add file" },
         r = { require("harpoon.mark").rm_file, "Remove file" },
@@ -109,8 +116,8 @@ vim.keymap.set("n", "<A-c>", ":BufferClose<CR>", opts)
 vim.keymap.set("n", "<C-p>", ":BufferPick<CR>", opts)
 
 -- nvim
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<A-k>", "<cmd>m .-2<CR>")
+vim.keymap.set("n", "<A-j>", "<cmd>m .+1<CR>")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])

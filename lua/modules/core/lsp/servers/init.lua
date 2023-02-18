@@ -4,6 +4,7 @@ function M.setup(lsp, on_attach, lsp_flags)
     local path = "modules.core.lsp.servers."
     
     local servers = {
+        "lua",
         "typescript",
         "rust",
         "omnisharp",

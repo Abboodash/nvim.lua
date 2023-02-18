@@ -84,5 +84,3 @@ local cmp_config = {
 }
 
 cmp.setup(cmp_config)
-
-vim.cmd("highlight! BorderBG guibg=NONE guifg=#2c383d")

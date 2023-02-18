@@ -25,13 +25,16 @@ local M = {
 	{"onsails/lspkind.nvim"},         -- Required
     {'rafamadriz/friendly-snippets'}, -- Optional
   
+    -- DAPs
+    {"mfussenegger/nvim-dap"},
+    {"rcarriga/nvim-dap-ui"},     
+    {"jay-babu/mason-nvim-dap.nvim"},
+
     -- Other
     {"SmiteshP/nvim-navic"},
     {"jose-elias-alvarez/typescript.nvim"},
     {"folke/neodev.nvim"},
     {"simrat39/rust-tools.nvim"},
-    {"mfussenegger/nvim-dap"},
-    {"rcarriga/nvim-dap-ui"},     
     {"Hoffs/omnisharp-extended-lsp.nvim"},
 
     }
@@ -103,6 +106,7 @@ function M.config()
     require("modules.core.lsp.cmp")
     require("modules.core.lsp.null-ls")
     require("modules.core.lsp.neodev")
+    require("modules.core.lsp.dap")
     require("modules.core.lsp.dap.dapui")
 end
 

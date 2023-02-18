@@ -1,6 +1,6 @@
 ## 🍃 Information
 
-> NOTE: for the [nixfmt](https://github.com/serokell/nixfmt) formatter install it manually
+> NOTE: for the [`nixfmt`](https://github.com/serokell/nixfmt) and [`mono`](https://www.mono-project.com) install it manually
 
 <details>
 <summary>
@@ -17,10 +17,4 @@
 ```bash
 # Clone the repo
 git clone https://github.com/Abboodash/nvim.lua
-```
-
-then make a directory called `.profile` and a file in it `profile.json` and put in it:
-
-```json
-{ "current_colorscheme": "github_dark_default" }
 ```
