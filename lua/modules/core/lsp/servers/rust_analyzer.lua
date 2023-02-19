@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(lsp, on_attach, lsp_flags)
+function M.setup(lsp, settings)
     lsp.configure("rust_analyzer", {
         on_attach = function(client, bufnr)
             require("rust-tools").setup({
@@ -163,8 +163,8 @@ function M.setup(lsp, on_attach, lsp_flags)
                     adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
                 },
                 server = {
-                    on_attach = on_attach,
-                    flags = lsp_flags,
+                    on_attach = settings.on_attach,
+                    flags = settings.lsp_flags,
                     standalone = false,
                     settings = {
                         ["rust-analyzer"] = {

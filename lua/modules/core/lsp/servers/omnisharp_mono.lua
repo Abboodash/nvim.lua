@@ -1,14 +1,14 @@
 local M = {}
 
-function M.setup(lsp, on_attach, lsp_flags)
+function M.setup(lsp, settings)
     lsp.configure("omnisharp_mono", {
         on_attach = function(client, bufnr)
             local pid = vim.fn.getpid()
             local omnisharp_bin = vim.env.HOME .. "/.local/share/nvim/mason/packages/omnisharp-mono/run"
 
             lspconfig["omnisharp_mono"].setup({
-                on_attach = on_attach,
-                flags = lsp_flags,
+                on_attach = settings.on_attach,
+                flags = settings.lsp_flags,
 
                 handlers = {
                     ["textDocument/definition"] = require("omnisharp_extended").handler,

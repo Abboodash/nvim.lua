@@ -1,17 +1,17 @@
 local M = {}
 
-function M.setup(lsp, on_attach, lsp_flags)
+function M.setup(lsp, settings)
     local path = "modules.core.lsp.servers."
     
     local servers = {
-        "lua",
-        "typescript",
-        "rust",
-        "omnisharp",
+        "lua_ls",
+        "omnisharp_mono",
+        "rust_analyzer",
+        "tsserver",
     }
 
     for _, server in ipairs(servers) do
-        require(path .. server).setup(lsp, on_attach, lsp_flags)
+        require(path .. server).setup(lsp, settings)
     end
 end
 

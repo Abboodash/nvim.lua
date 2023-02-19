@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(lsp, on_attach, lsp_flags)
+function M.setup(lsp, settings)
     lsp.configure("tsserver", {
         on_attach = function(client, bufnr)
             require("typescript").setup({
@@ -10,8 +10,8 @@ function M.setup(lsp, on_attach, lsp_flags)
                     fallback = true, -- fall back to standard LSP definition on failure
                 },
                 server = { -- pass options to lspconfig's setup method
-                    on_attach = on_attach,
-                    flags = lsp_flags,
+                    on_attach = settings.on_attach,
+                    flags = settings.lsp_flags,
                 },
             })
         end

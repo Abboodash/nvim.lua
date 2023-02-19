@@ -1,9 +1,9 @@
 local M = {}
 
-function M.setup(lsp, on_attach, lsp_flags)
+function M.setup(lsp, settings)
     lsp.configure("lua_ls", {
-        on_attach = on_attach,
-        flags = lsp_flags,
+        on_attach = settings.on_attach,
+        flags = settings.lsp_flags,
 
         settings = {
             Lua = {
@@ -27,4 +27,3 @@ function M.setup(lsp, on_attach, lsp_flags)
 end
 
 return M
-
