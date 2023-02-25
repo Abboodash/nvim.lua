@@ -1,5 +1,5 @@
--- Core
-require("core.settings")
-require("core.plugins")
-require("core.keybinds")
-require("core.colorscheme")
+require('abboodash.settings')
+require('abboodash.lazy')
+require('abboodash.keymaps')
+require('abboodash.highlights')
+require('abboodash.system')
