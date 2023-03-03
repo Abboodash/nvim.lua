@@ -98,5 +98,7 @@ return {
     { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
     { 'folke/trouble.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
     { 'lukas-reineke/indent-blankline.nvim' },
-    { 'iamcco/markdown-preview.nvim', build = 'cd app && yarn install' }
+    { 'iamcco/markdown-preview.nvim', build = 'cd app && yarn install' },
+    { 'mvllow/modes.nvim', tag = 'v0.2.0' },
+    { 'junegunn/goyo.vim' }
 }
