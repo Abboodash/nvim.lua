@@ -5,7 +5,7 @@ if (not status) then return end
 
 require('mason.settings').set({ ui = { border = 'rounded' } })
 
-local lsp = require('lsp-zero').preset({
+lsp = require('lsp-zero').preset({
     name = 'minimal',
     set_lsp_keymaps = true,
     manage_nvim_cmp = false,
@@ -18,7 +18,7 @@ lsp.ensure_installed({
     'lua_ls',
     'omnisharp_mono',
     'nil_ls',
-    'pylsp',
+    'pyright',
     'astro',
     'tailwindcss',
     'cssls',
@@ -28,6 +28,16 @@ lsp.ensure_installed({
 
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
+
+lsp.configure('lua_ls', {
+    settings = {
+        Lua = {
+            runtime = { version = 'LuaJIT' },
+            workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+            telemetry = { enable = false }
+        }
+    }
+})
 
 lsp.skip_server_setup({ 'tsserver' })
 
