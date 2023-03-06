@@ -16,7 +16,7 @@
 
 ## Requirements
 
-I'm too lazy to right this for now
+I'm too lazy to right this for now.
 
 ## 📦 Setup
 
