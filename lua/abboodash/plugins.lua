@@ -28,7 +28,7 @@ return {
     { 'folke/which-key.nvim' },
     { 'EdenEast/nightfox.nvim' },
     { 'windwp/nvim-autopairs' },
-    { 'tpope/vim-fugitive',     dependencies = { { 'tpope/vim-rhubarb' } } },
+    { 'tpope/vim-fugitive', dependencies = { { 'tpope/vim-rhubarb' } } },
     { 'lewis6991/gitsigns.nvim' },
     {
         'VonHeikemen/lsp-zero.nvim',
@@ -86,25 +86,19 @@ return {
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     { 'dstein64/vim-startuptime' },
-    { 'romgrk/barbar.nvim',                 dependencies = { { 'nvim-tree/nvim-web-devicons' } } },
+    { 'romgrk/barbar.nvim', dependencies = { { 'nvim-tree/nvim-web-devicons' } } },
     { 'mbbill/undotree' },
-    { 'ThePrimeagen/harpoon',               dependencies = { { 'nvim-lua/plenary.nvim' } } },
+    { 'ThePrimeagen/harpoon', dependencies = { { 'nvim-lua/plenary.nvim' } } },
     { 'norcalli/nvim-colorizer.lua' },
     { 'numToStr/Comment.nvim' },
     { 'ziontee113/icon-picker.nvim' },
     { 'phaazon/hop.nvim' },
-    { 'vuki656/package-info.nvim',          dependencies = { { 'MunifTanjim/nui.nvim' } } },
+    { 'vuki656/package-info.nvim', dependencies = { { 'MunifTanjim/nui.nvim' } } },
     { 'j-hui/fidget.nvim' },
-    { 'kevinhwang91/nvim-ufo',              dependencies = 'kevinhwang91/promise-async' },
-    { 'folke/trouble.nvim',                 dependencies = 'nvim-tree/nvim-web-devicons' },
+    { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
+    { 'folke/trouble.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
     { 'lukas-reineke/indent-blankline.nvim' },
-    { 'iamcco/markdown-preview.nvim',       build = 'cd app && yarn install' },
-    { 'mvllow/modes.nvim',                  tag = 'v0.2.0' },
-    { 'junegunn/goyo.vim' },
-    {
-        'huy-hng/anyline.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        config = true,
-        event = 'VeryLazy'
-    }
+    { 'iamcco/markdown-preview.nvim', build = 'cd app && yarn install' },
+    { 'mvllow/modes.nvim', tag = 'v0.2.0' },
+    { 'junegunn/goyo.vim' }
 }
