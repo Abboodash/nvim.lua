@@ -46,5 +46,5 @@ wk.register({
         x = { '<cmd>Lazy clean<cr>', 'Clean' },
         h = { '<cmd>Lazy health<cr>', 'Health' }
     },
-    u = { name = 'Utils', h = { '<cmd>nohlsearch<cr>', 'Clear search' } }
+    U = { name = 'Utils', h = { '<cmd>nohlsearch<cr>', 'Clear search' } }
 }, { prefix = '<leader>' })
