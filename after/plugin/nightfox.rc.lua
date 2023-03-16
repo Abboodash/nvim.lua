@@ -19,7 +19,8 @@ nightfox.setup({
                 tritan = 0 -- Severity [0,1] for tritan (blue)
             }
         },
-        styles = { -- Style to be applied to different syntax groups
+        styles = {
+            -- Style to be applied to different syntax groups
             comments = 'NONE', -- Value is any valid attr-list value `:help attr-list`
             conditionals = 'NONE',
             constants = 'NONE',
@@ -31,7 +32,8 @@ nightfox.setup({
             types = 'NONE',
             variables = 'NONE'
         },
-        inverse = { -- Inverse highlight for different types
+        inverse = {
+            -- Inverse highlight for different types
             match_paren = false,
             visual = false,
             search = false
@@ -44,5 +46,3 @@ nightfox.setup({
     specs = {},
     groups = {}
 })
-
-vim.cmd.colorscheme('carbonfox')
