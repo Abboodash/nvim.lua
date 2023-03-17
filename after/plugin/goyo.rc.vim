@@ -1,5 +1,6 @@
 function! s:goyo_enter()
     lua require("lualine").hide({unhide = false})
+    lua vim.cmd('Barbecue hide')
   if has('gui_running')
     set fullscreen
     set background=light
@@ -9,6 +10,7 @@ endfunction
 
 function! s:goyo_leave()
     lua require("lualine").hide({unhide = true})
+    lua vim.cmd('Barbecue show')
   if has('gui_running')
     set nofullscreen
     set background=dark
