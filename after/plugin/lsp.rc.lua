@@ -18,7 +18,7 @@ lsp.ensure_installed({
     'lua_ls',
     'omnisharp_mono',
     'nil_ls',
-    'pyright',
+    'jedi_language_server',
     'astro',
     'tailwindcss',
     'cssls',
@@ -78,7 +78,8 @@ require('typescript').setup({
     go_to_source_definition = {
         fallback = true -- fall back to standard LSP definition on failure
     },
-    server = { -- pass options to lspconfig's setup method
+    server = {
+        -- pass options to lspconfig's setup method
         on_attach = on_attach,
         flags = lsp_flags
     }
@@ -97,4 +98,7 @@ require('mason-nvim-dap').setup_handlers()
 local status2, wk = pcall(require, 'which-key')
 if (not status2) then return end
 
+wk.register({ m = { name = 'Mason', m = { '<cmd>Mason<cr>', 'Open' } } })
+wk.register({ m = { name = 'Mason', m = { '<cmd>Mason<cr>', 'Open' } } })
+wk.register({ m = { name = 'Mason', m = { '<cmd>Mason<cr>', 'Open' } } })
 wk.register({ m = { name = 'Mason', m = { '<cmd>Mason<cr>', 'Open' } } })

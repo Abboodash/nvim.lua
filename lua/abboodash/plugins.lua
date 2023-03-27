@@ -48,7 +48,6 @@ return {
             { 'onsails/lspkind.nvim' }, -- Required
             { 'hrsh7th/cmp-buffer' }, -- Optional
             { 'hrsh7th/cmp-path' }, -- Optional
-            { 'hrsh7th/cmp-cmdline' },
             { 'saadparwaiz1/cmp_luasnip' }, -- Optional
             { 'hrsh7th/cmp-nvim-lua' }, -- Optional
             -- Parsing
@@ -85,6 +84,18 @@ return {
     {
         'nvim-neorg/neorg',
         build = ':Neorg sync-parsers',
+        opts = {
+            load = {
+                ['core.defaults'] = {}, -- Loads default behaviour
+                ['core.norg.concealer'] = {}, -- Adds pretty icons to your documents
+                ['core.norg.dirman'] = { -- Manages Neorg workspaces
+                    config = {
+                        workspaces = { main = '~/notes' },
+                        default_workspace = 'main'
+                    }
+                }
+            }
+        },
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     { 'dstein64/vim-startuptime' },
@@ -102,5 +113,9 @@ return {
     { 'lukas-reineke/indent-blankline.nvim' },
     { 'iamcco/markdown-preview.nvim', build = 'cd app && yarn install' },
     { 'mvllow/modes.nvim', tag = 'v0.2.0' },
-    { 'junegunn/goyo.vim' }
+    { 'gelguy/wilder.nvim' },
+    { 'junegunn/goyo.vim' },
+
+    { 'romgrk/fzy-lua-native', build = 'make' },
+    { 'nixprime/cpsm', build = 'bash install.sh' }
 }
