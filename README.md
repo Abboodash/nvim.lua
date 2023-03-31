@@ -2,8 +2,6 @@
 
 ## 🍃 Information
 
-> NOTE: for the [`nixfmt`](https://github.com/serokell/nixfmt) and [`mono`](https://www.mono-project.com) install it manually
-
 <details>
 <summary>
     <b>Screenshots</b>
@@ -16,7 +14,16 @@
 
 ## Requirements
 
-I'm too lazy to right this for now.
+- [`nixfmt`](https://github.com/serokell/nixfmt)
+- [`mono`](https://www.mono-project.com)
+- [`fd`](https://github.com/sharkdp/fd)
+- [`rg`](https://github.com/BurntSushi/ripgrep)
+- [`git`](https://git-scm.com)
+- [`node`](https://nodejs.org)
+- [`python`](https://python.org)
+- [`fzf`](https://github.com/junegunn/fzf)
+- [`zoxide`](https://github.com/ajeetdsouza/zoxide)
+- [`ghq`](https://github.com/x-motemen/ghq)
 
 ## 📦 Setup
 

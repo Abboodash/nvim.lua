@@ -99,7 +99,6 @@ return {
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     { 'dstein64/vim-startuptime' },
-    { 'romgrk/barbar.nvim', dependencies = { { 'nvim-tree/nvim-web-devicons' } } },
     { 'mbbill/undotree' },
     { 'ThePrimeagen/harpoon', dependencies = { { 'nvim-lua/plenary.nvim' } } },
     { 'norcalli/nvim-colorizer.lua' },
